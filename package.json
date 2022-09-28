@@ -4,6 +4,7 @@
   "description": "Dearest,",
   "main": "index.js",
   "scripts": {
+    "start": "node server.js",
     "devserver": "node server.js",
     "test": "jest"
   },
