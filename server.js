@@ -11,7 +11,13 @@ app.get('/books', (req, res) => {
   res.send(books);
 })
 
-app.listen(8080, function () {
+// GET /books/:id
+app.get('/books/:id', (req, res) => {
+  const book = books.find(book => book.id === parseInt(req.params.id));
+  res.send(book);
+})
+
+app.listen(8080, () => {
   console.log('listening on 8080');
 });
 

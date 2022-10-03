@@ -13,7 +13,8 @@ const books = [
 ];
 
 describe("crud actions", () => {
-  it("/books displays all the books", () => {
+
+  it("GET /books displays all the books", () => {
     return request(server)
       .get('/books')
       .expect(200)
@@ -24,4 +25,17 @@ describe("crud actions", () => {
         )
       })
   })
+
+  it("GET /books/1 displays book 1", () => {
+    return request(server)
+      .get('/books/1')
+      .expect(200)
+      .expect('Content-Type', /json/)
+      .then((response) => {
+        expect(response.body).toEqual(
+          books[0]
+        )
+      })
+  })
+
 })
