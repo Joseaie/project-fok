@@ -4,8 +4,8 @@
   "description": "Dearest,",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-    "devserver": "node server.js",
+    "start": "node app.js",
+    "devserver": "node app.js",
     "test": "jest"
   },
   "repository": {
