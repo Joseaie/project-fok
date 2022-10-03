@@ -29,7 +29,7 @@ describe("crud actions", () => {
       .expect(200)
       .expect("Content-Type", /json/)
       .then((response) => {
-        expect(response.body).toEqual(books[0]);
+        expect(response.body).toEqual(books.find((book) => book.id === 1));
       });
   });
 });
