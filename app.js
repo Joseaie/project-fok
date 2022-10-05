@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const createError = require("http-errors");
 
 const books = [
   { id: 1, title: 'Book1', author: 'M. Garfield', rating: 5 },
@@ -12,8 +13,12 @@ app.get('/books', (req, res) => {
 })
 
 // GET /books/:id
-app.get('/books/:id', (req, res) => {
+app.get('/books/:id', (req, res, next) => {
   const book = books.find(book => book.id === parseInt(req.params.id));
+  if (!book) {
+    // res.sendStatus(404);
+    return next(createError(404, "Not found!"));
+  }
   res.send(book);
 })
 

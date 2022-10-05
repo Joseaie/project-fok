@@ -22,7 +22,7 @@ describe("crud actions", () => {
         expect(response.body).toEqual(books);
       });
   });
-
+  // GET /book/:id - displays a requested book
   it("GET /books/1 displays book 1", () => {
     return request(app)
       .get("/books/1")
@@ -32,4 +32,10 @@ describe("crud actions", () => {
         expect(response.body).toEqual(books.find((book) => book.id === 1));
       });
   });
+
+  // GET /books/:id - returns 404 when book not found
+  it("GET /books/999 returns error", () => {
+    return request(app).get("/books/999").expect(404)
+  });
+
 });
