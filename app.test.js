@@ -22,6 +22,7 @@ describe("crud actions", () => {
         expect(response.body).toEqual(books);
       });
   });
+  
   // GET /book/:id - displays a requested book
   it("GET /books/1 displays book 1", () => {
     return request(app)
@@ -38,4 +39,25 @@ describe("crud actions", () => {
     return request(app).get("/books/999").expect(404)
   });
 
+  // POST /books - the book is created
+  it("POST /books creates a book", () => {
+    return request(app)
+      .post("/books")
+      .expect(201)
+      .send({title: "Book title", author: "JB Fletcher", rating: 4})
+      .expect("Content-Type", /json/)
+      .then((response) => {
+        expect(response.body).toEqual(
+          expect.objectContaining({
+            title: expect.any(String),
+            author: expect.any(String),
+            rating: expect.any(Number)
+          })
+        );
+      });
+  });
+
+  // POST /books error if title not string 
+
 });
+

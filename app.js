@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const createError = require("http-errors");
 
+app.use(express.json());
+
 const books = [
   { id: 1, title: 'Book1', author: 'M. Garfield', rating: 5 },
   { id: 2, title: 'Book2', author: 'E. Penny', rating: 3 }
@@ -16,10 +18,26 @@ app.get('/books', (req, res) => {
 app.get('/books/:id', (req, res, next) => {
   const book = books.find(book => book.id === parseInt(req.params.id));
   if (!book) {
-    // res.sendStatus(404);
     return next(createError(404, "Not found!"));
   }
   res.send(book);
+})
+
+// POST /books
+app.post('/books', (req, res) => {
+
+  const { title, author, rating } = req.body; // access multiple properties of an object and declare as variables all in one line
+
+  const newBook = {
+    title: title,
+    author: author,
+    rating: parseInt(rating),
+    id: books.length + 1
+  }
+
+  books.push(newBook);
+  res.status(201).json(newBook);
+
 })
 
 app.listen(8080, () => {
