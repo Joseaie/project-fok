@@ -37,8 +37,17 @@ app.post('/books', (req, res) => {
 
   books.push(newBook);
   res.status(201).json(newBook);
-
 })
+
+// PUT /book/:id
+app.put('/books/:id',(req, res) => {
+  const book = books.find(book => book.id === parseInt(req.params.id));
+  book.title = req.body.title;
+  //book.author = req.body.author;
+  //book.rating = req.body.rating;
+  res.send(book);
+})
+
 
 app.listen(8080, () => {
   console.log('listening on 8080');
