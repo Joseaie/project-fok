@@ -42,9 +42,9 @@ describe("crud actions", () => {
   // POST /books - the book is created
   it("POST /books creates a book", () => {
     return request(app)
-      .post("/books")
+      .post("/books") // action defined on app.js
       .expect(201)
-      .send({title: "Book title", author: "JB Fletcher", rating: 4})
+      .send({title: "Book title", author: "JB Fletcher", rating: 4}) // content of send represents the content of the request body
       .expect("Content-Type", /json/)
       .then((response) => {
         expect(response.body).toEqual(
@@ -59,5 +59,21 @@ describe("crud actions", () => {
 
   // POST /books error if title not string 
 
+  it("PUT /books/1 updates record given a different title", () => {
+    return request(app)
+      .put("/books/1")
+      .send({title: "Different title"})
+      .expect(200)
+      .expect("Content-Type", /json/)
+      .then((response) => {
+        expect(response.body).toEqual(
+          expect.objectContaining({
+            title: "Different title",
+            author: "M. Garfield",
+            rating: 5
+          })
+        );
+      });
+  });    
 });
-
+//To do: test return 404 if book doesn't exist
