@@ -4,7 +4,7 @@ const createError = require("http-errors");
 
 app.use(express.json());
 
-const books = [
+let books = [
   { id: 1, title: 'Book1', author: 'M. Garfield', rating: 5 },
   { id: 2, title: 'Book2', author: 'E. Penny', rating: 3 }
 ];
@@ -16,7 +16,7 @@ app.get('/books', (req, res) => {
 
 // GET /books/:id
 app.get('/books/:id', (req, res, next) => {
-  const book = books.find(book => book.id === parseInt(req.params.id));
+  let book = books.find(book => book.id === parseInt(req.params.id));
   if (!book) {
     return next(createError(404, "Not found!"));
   }
@@ -26,18 +26,30 @@ app.get('/books/:id', (req, res, next) => {
 // POST /books
 app.post('/books', (req, res) => {
 
-  const { title, author, rating } = req.body; // access multiple properties of an object and declare as variables all in one line
+  let { title, author, rating } = req.body; // access multiple properties of an object and declare as variables all in one line
 
-  const newBook = {
+  let newBook = {
     title: title,
     author: author,
     rating: parseInt(rating),
-    id: books.length + 1
+    id: books.length + 1  //will be problematic with delete being implemented.
   }
 
   books.push(newBook);
+
   res.status(201).json(newBook);
 
+})
+
+// DELETE
+app.delete('/books/:id', (req, res, next) => {
+  let indexOfBook = books.findIndex(item => item.id === parseInt(req.params.id));
+
+  if (indexOfBook < 0){
+    return next(createError(404, "Not found!"));
+  }
+  books.splice(indexOfBook, 1);
+  res.status(204).send();
 })
 
 app.listen(8080, () => {

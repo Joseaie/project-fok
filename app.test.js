@@ -7,7 +7,7 @@ describe("test", () => {
   });
 });
 
-const books = [
+let books = [
   { id: 1, title: "Book1", author: "M. Garfield", rating: 5 },
   { id: 2, title: "Book2", author: "E. Penny", rating: 3 },
 ];
@@ -39,7 +39,7 @@ describe("crud actions", () => {
     return request(app).get("/books/999").expect(404)
   });
 
-  // POST /books - the book is created
+  //POST /books - the book is created
   it("POST /books creates a book", () => {
     return request(app)
       .post("/books")
@@ -58,6 +58,27 @@ describe("crud actions", () => {
   });
 
   // POST /books error if title not string 
+
+  // DELETE
+  it("DELETE /book/:id deletes book with relevant id", () => {
+    let numberOfBooks = books.length
+    let bookForDeletion = books.find(book => book.id === 1)
+
+    return request(app)
+      .delete("/books/1")
+      .expect(204)
+      .then((response) => {
+        expect(response.body).toEqual({})
+        
+      })
+     
+    });
+
+  it("DELETE /books/999 returns an error", () => {
+    return request(app)
+      .delete("/books/999")
+      .expect(404)
+  });
 
 });
 
