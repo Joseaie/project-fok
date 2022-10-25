@@ -83,3 +83,17 @@ describe('crud actions', () => {
   // book doesn't exist => nothing should be updated & return 404 (Not found)
 });
 
+describe('PATCH', () => {
+  it('updates one attribute of a given book', () => {
+    return request(app)
+      .patch('/books/1')
+      .send({ title: 'Flamingo' })
+      .then((response) => {
+        expect(response.body).toEqual(
+          expect.objectContaining({
+            title: 'Flamingo',
+          })
+        );
+      });
+  });
+});
