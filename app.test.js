@@ -58,42 +58,4 @@ describe('crud actions', () => {
   });
 
   // (implement maybe later) POST /books error if title not string
-
-  // PATCH /books/:id tests
-  // given only one property (e.g. title) => return 200 & changes property correctly & doesn't change/overwrite the other fields
-  it('PATCH /books/:id given only one property it only updates given property', () => {
-    return request(app)
-      .patch('/books/1')
-      .expect(200)
-      .send({ title: 'Flamingo' })
-      .expect('Content-Type', /json/)
-      .then((response) => {
-        expect(response.body).toEqual(
-          expect.objectContaining({
-            id: 1,
-            title: 'Flamingo',
-            author: 'M. Garfield',
-            rating: 5,
-          })
-        );
-      });
-  });
-  // given all possible properties => return 200 & changes all of them correctly
-  // given invalid data => nothing should be updated & return 400 (Bad Request)
-  // book doesn't exist => nothing should be updated & return 404 (Not found)
-});
-
-describe('PATCH', () => {
-  it('updates one attribute of a given book', () => {
-    return request(app)
-      .patch('/books/1')
-      .send({ title: 'Flamingo' })
-      .then((response) => {
-        expect(response.body).toEqual(
-          expect.objectContaining({
-            title: 'Flamingo',
-          })
-        );
-      });
-  });
 });

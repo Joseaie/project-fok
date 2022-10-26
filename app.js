@@ -38,37 +38,8 @@ app.post('/books', (req, res) => {
   res.status(201).json(newBook);
 });
 
-// PATCH
-// { title: 'Flamingo' }
-app.patch('/books/:id', (req, res) => {
-  books;
-  // get books, compare ids, get correct book
-  // check property/ies being sent
-  // update the property of book record with what's been sent
-
-  const book = books.find((book) => book.id === parseInt(req.params.id));
-  const updatedTitle = req.body.title;
-  book.title = updatedTitle;
-
-  console.log(book);
-
-  res.send(book);
-  // question for Jasper (design)
-  // Approach 1: patch returns updated book
-  // one test only:
-  // update title -> check for 200 and check patch returns updated book
-
-  // OR
-
-  // Approach 2: patch does not return updated book
-  // first test:
-  // update title -> check that response is successful (200)
-  // second test (following first one):
-  // check that the get books/:id now returns the updated book
-});
-
-app.listen(8080, () => {
-  console.log('listening on 8080');
-});
+// app.listen(8080, () => {
+//   console.log('listening on 8080');
+// });
 
 module.exports = app;
