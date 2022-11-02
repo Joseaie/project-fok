@@ -10,6 +10,8 @@ describe('Updating books using PATCH', () => {
         expect(response.body).toEqual(
           expect.objectContaining({
             title: 'Flamingo',
+            author: 'M. Garfield',
+            rating: 5,
           })
         );
       });
