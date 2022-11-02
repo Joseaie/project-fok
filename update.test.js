@@ -1,13 +1,6 @@
 const request = require('supertest');
 const update = require('./update');
 
-// PATCH /books/:id tests
-// given only one property (e.g. title) => return 200 & changes property
-// correctly & doesn't change/overwrite the other fields
-// given all possible properties => return 200 & changes all of them correctly
-// given invalid data => nothing should be updated & return 400 (Bad Request)
-// book doesn't exist => nothing should be updated & return 404 (Not found)
-
 describe('Updating books using PATCH', () => {
   it('can update one attribute of a given book', () => {
     return request(update)
