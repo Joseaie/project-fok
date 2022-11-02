@@ -37,8 +37,12 @@ describe('Updating books using PATCH', () => {
       .patch('/books/2')
       .send({ title: 5, author: 'Pablo' })
       .expect(422);
-    // check the type of the input and throw error if it doesn't match
-    // is this something TypeScript would be used for
-    // also, could we use try, catch blocks?
+  });
+
+  it('returns a status 404 when a book does not exist and nothing gets updated', () => {
+    return request(update)
+      .patch('/books/6')
+      .send({ title: 'apple', author: 'Cherry' })
+      .expect(404);
   });
 });
