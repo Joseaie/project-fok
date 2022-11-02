@@ -13,20 +13,7 @@ const update = app.patch('/books/:id', (request, response) => {
     }
   }
 
-  console.log('updated book:', book);
   response.send(book);
-  // question for Jasper (design)
-  // Approach 1: patch returns updated book
-  // one test only:
-  // update title -> check for 200 and check patch returns updated book
-
-  // OR
-
-  // Approach 2: patch does not return updated book
-  // first test:
-  // update title -> check that response is successful (200)
-  // second test (following first one):
-  // check that the get books/:id now returns the updated book
 });
 
 module.exports = update;
