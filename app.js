@@ -37,11 +37,10 @@ app.post('/books', (req, res) => {
 
   books.push(newBook);
   res.status(201).json(newBook);
-
-})
-
-app.listen(8080, () => {
-  console.log('listening on 8080');
 });
+
+// app.listen(8080, () => {
+//   console.log('listening on 8080');
+// });
 
 module.exports = app;
